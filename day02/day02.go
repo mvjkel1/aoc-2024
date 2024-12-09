@@ -59,13 +59,40 @@ func adjacentLevelsDifferOk(v []int) bool {
 	return true
 }
 
+func isSliceOk(slice []int) bool {
+	if adjacentLevelsDifferOk(slice) && (sort.IntsAreSorted(slice) || intsAreSortedDescending(slice)) {
+		return true
+	}
+	return false
+}
+
 func part1() int {
 	res := 0
 	content := readFileContent("input.txt")
 	for _, v := range content {
-		if sort.IntsAreSorted(v) || intsAreSortedDescending(v) {
-			if adjacentLevelsDifferOk(v) {
+		if isSliceOk(v) {
+			res += 1
+		}
+	}
+	return res
+}
+
+func removeSliceElement(slice []int, s int) []int {
+	newSlice := make([]int, len(slice)-1)
+	copy(newSlice, slice[:s])
+	copy(newSlice[s:], slice[s+1:])
+	return newSlice
+}
+
+func part2() int {
+	res := 0
+	content := readFileContent("input.txt")
+	for _, c := range content {
+		for i := 0; i < len(c); i++ {
+			updatedSlice := removeSliceElement(c, i)
+			if isSliceOk(updatedSlice) {
 				res += 1
+				break
 			}
 		}
 	}
@@ -74,4 +101,5 @@ func part1() int {
 
 func main() {
 	fmt.Println("Part 1 Result:", part1())
+	fmt.Println("Part 2 Result:", part2())
 }
