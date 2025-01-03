@@ -61,7 +61,7 @@ func walk(routeMap [][]string) {
 	sum := 0
 	defer func() {
 		if r := recover(); r != nil {
-			fmt.Println("Sum:", sum)
+			fmt.Println("Part 1:", sum)
 		}
 	}()
 	var visitedPosMap [][]int
