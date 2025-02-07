@@ -33,7 +33,7 @@ func readFileContent(fileName string) [][]int {
 	return result
 }
 
-func intsAreSortedDescending(v []int) bool {
+func areIntsAreSortedDescending(v []int) bool {
 	for i := 1; i < len(v); i++ {
 		if v[i-1] < v[i] {
 			return false
@@ -60,7 +60,7 @@ func adjacentLevelsDifferOk(v []int) bool {
 }
 
 func isSliceOk(slice []int) bool {
-	if adjacentLevelsDifferOk(slice) && (sort.IntsAreSorted(slice) || intsAreSortedDescending(slice)) {
+	if adjacentLevelsDifferOk(slice) && (sort.IntsAreSorted(slice) || areIntsAreSortedDescending(slice)) {
 		return true
 	}
 	return false
